@@ -1,29 +1,28 @@
 package com.works.transito.transito_api.controller;
 
 import com.works.transito.transito_api.domain.model.Proprietario;
+import com.works.transito.transito_api.repository.ProprietarioRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
 public class ProprietarioController {
 
+    private final ProprietarioRepository proprietarioRepository;
+
+
     @GetMapping("/proprietarios")
-    public List<Proprietario> listar(){
-        var proprietario1 = new Proprietario();
-        proprietario1.setId(1L);
-        proprietario1.setNome("Lucas");
-        proprietario1.setEmail("lucas@gmail.com");
-        proprietario1.setTelefone("61 3399-3432");
-
-        var proprietario2 = new Proprietario();
-        proprietario2.setId(2L);
-        proprietario2.setNome("Maria");
-        proprietario2.setEmail("maria@gmail.com");
-        proprietario2.setTelefone("61 3399-3332");
-
-        return Arrays.asList(proprietario1,proprietario2);
+    public List<Proprietario> listar() {
+     //   return proprietarioRepository.findByNomeContaining("a");
+      return proprietarioRepository.findAll();
     }
 }
